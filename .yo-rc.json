@@ -1,0 +1,6 @@
+{
+  "generator-lit-wc": {
+    "tagName": "stacked-sheets",
+    "className": "StackedSheets"
+  }
+}
