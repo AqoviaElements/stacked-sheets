@@ -27,7 +27,7 @@ class SheetItem extends LitElement {
     
     const sheetClosedEvent = new CustomEvent("sheetClosed", {
       detail: {
-        sheetId: 0 // TODO: sheet id
+        sheetId: 0 // TODO: sheet id 
       }
     });
     this.dispatchEvent(sheetClosedEvent);
