@@ -99,6 +99,32 @@ export default args => {
         ]
     };
 
+    let sheetItemsHolderEs6 = {
+        input: ['src/components/sheet-items-holder.js'],
+        output: {
+            file: `${dest}/sheet-items-holder.js`,
+            format: 'es',
+            sourcemap: true,
+        },
+        plugins: [
+            ...basePlugins,
+            es6BabelTranspilation
+        ]
+    };
+    
+    let sheetItemsHolderEs5 = {
+        input: ['src/components/sheet-items-holder.js'],
+        output: {
+            file: `${dest}/sheet-items-holder.es5.js`,
+            format: 'umd',
+            sourcemap: true,
+        },
+        plugins: [
+            ...basePlugins,
+            es5BabelTranspilation
+        ]
+    };
+
     if (args.demo) {
         let demoPlugins = [
             serve({ contentBase: dest, verbose: true, port: 8999 }),
@@ -111,5 +137,5 @@ export default args => {
         ];
     }
 
-    return [ stackedSheetsEs5, sheetItemEs5, stackedSheetsEs6, sheetItemEs6 ];
+    return [ stackedSheetsEs5, sheetItemEs5, stackedSheetsEs6, sheetItemEs6, sheetItemsHolderEs5, sheetItemsHolderEs6 ];
 } 

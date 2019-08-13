@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css, unsafeCSS } from 'lit-element';
 import { SheetItemStyles } from '../styles/sheet-item-styles.js';
 
 class SheetItem extends LitElement {
@@ -6,7 +6,8 @@ class SheetItem extends LitElement {
     return {
       title: { type: String },
       width: { type: Number },
-      _sheetVisible: { type: Boolean }
+      sheetVisible: { type: Boolean },
+      sheetOrder: { Number }
     };
   }
 
@@ -18,12 +19,13 @@ class SheetItem extends LitElement {
 
   constructor() {
     super();
-    this.title = "New sheet";
     this.width = 100;
+    this.sheetVisible = false;
+    this.sheetOrder = 0;
   }
 
   closeSheet() {
-    this._sheetVisible = false;
+    this.sheetVisible = false;
     
     const sheetClosedEvent = new CustomEvent("sheetClosed", {
       detail: {
@@ -31,14 +33,46 @@ class SheetItem extends LitElement {
       }
     });
     this.dispatchEvent(sheetClosedEvent);
+
+    this.addEventListener('sheetItemAdded', this._handleNewItem);
+  }
+
+  _handleNewItem(e) {
+    this.activeSheets = e.detail.totalActiveSheets;
+
+  }
+
+  updated(changedProperties) {
+      let old = changedProperties.get('sheetVisible');
+      if (old && !this.sheetVisible) {
+        // this sheet closed
+        // emit sheet closed message with sheet id
+      } else if (!old && this.sheetVisible) {
+        // this sheet opened
+        //
+      }
+
+  }
+
+  updateSheetPosition() {
+    // const pixelsOffset = 20;
+    // return (this.sheetsCount - this.sheetOrder) * -1 * pixelsOffset;
+
+    return 0;
+
   }
 
   render() {
     return html`
+    <style>
+      .sheet.-is-open {
+        transform: translateX(${unsafeCSS(this.updateSheetPosition())}px);
+      }
+    </style>
 
     ${this.svgTemplate}
 
-      <div class="sheet">
+      <div class="sheet ${this.sheetVisible ? '-is-open' : ''}">
 
         <header class="sheet__header">
           <h1 class="sheet__main-heading">${this.title}</h1>
@@ -46,10 +80,14 @@ class SheetItem extends LitElement {
         </header>
 
         <div class="sheet__frame">
-          <slot></slot>
+          <div class="sheet__content">
+            <slot></slot>
+          </div>
         </div>
 
       </div>
+
+      <div class="sheet-overlay"></div>
     `;
   }
 
