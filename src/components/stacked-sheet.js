@@ -6,7 +6,7 @@ class StackedSheet extends LitElement {
     return {
       title: { type: String },
       width: { type: String },
-      opened: { type: Boolean }
+      opened: { type: Boolean },
     };
   }
 
@@ -19,17 +19,19 @@ class StackedSheet extends LitElement {
     this.width = '100%';
     this.title = 'New Sheet';
     this.opened = false;
-    setTimeout(() => { this.opened = true }, 100);
+    setTimeout(() => {
+      this.opened = true;
+    }, 100);
   }
 
   firstUpdated() {
-    const sheetOpenedEvent = new CustomEvent("sheet-opened", { detail: {}, bubbles: true });
+    const sheetOpenedEvent = new CustomEvent('sheet-opened', { detail: {}, bubbles: true });
     this.dispatchEvent(sheetOpenedEvent);
   }
 
   closeSheet() {
     this.opened = false;
-    const sheetClosedEvent = new CustomEvent("sheet-closed", { detail: {}, bubbles: true });
+    const sheetClosedEvent = new CustomEvent('sheet-closed', { detail: {}, bubbles: true });
     this.dispatchEvent(sheetClosedEvent);
   }
 
@@ -37,20 +39,19 @@ class StackedSheet extends LitElement {
     const vwOffset = 0.5;
     return this._numberOfSheetsInFront * -1 * vwOffset;
   }
-  
+
   get sheetTransitionDelay() {
     const delay = 0.5;
     return this._numberOfSheetsInFront * delay;
   }
-  
+
   get _numberOfSheetsInFront() {
     let count = 0;
     let currentSheet = this;
-    while(currentSheet.nextElementSibling != null) {
+    while (currentSheet.nextElementSibling != null) {
       currentSheet = currentSheet.nextElementSibling;
 
-      if (currentSheet.opened)
-        count += 1;
+      if (currentSheet.opened) count += 1;
     }
 
     return count;

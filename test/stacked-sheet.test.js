@@ -19,12 +19,7 @@ describe('<stacked-sheet>', () => {
   it('setting a property on the element works', async () => {
     const open = true;
     const element = await fixture(html`
-      <stacked-sheet
-        opened=${open}
-        title="New Service"
-        width="90%"
-      >
-      </stacked-sheet>
+      <stacked-sheet opened=${open} title="New Service" width="90%"> </stacked-sheet>
     `);
     expect(element.opened).to.equal(true);
     expect(element.title).to.equal('New Service');
@@ -36,14 +31,15 @@ describe('<stacked-sheet>', () => {
       <stacked-sheet> </stacked-sheet>
     `);
 
-    setTimeout(() => { expect(element.opened).to.equal(true) }, 100);
+    setTimeout(() => {
+      expect(element.opened).to.equal(true);
+    }, 100);
 
     setTimeout(() => element.closeSheet());
     await oneEvent(element, 'sheet-closed');
 
     expect(element.opened).to.equal(false);
   });
-
 
   it('sheets should be aware of number of sheets in front', async () => {
     const element = await fixture(html`
@@ -54,10 +50,14 @@ describe('<stacked-sheet>', () => {
       </stacked-sheets-holder>
     `);
 
-    setTimeout(() => { expect(element.querySelectorAll('stacked-sheet')[0]._numberOfSheetsInFront).to.equal(2) }, 100);
-    setTimeout(() => { expect(element.querySelectorAll('stacked-sheet')[1]._numberOfSheetsInFront).to.equal(1) }, 100);
-    setTimeout(() => { expect(element.querySelectorAll('stacked-sheet')[2]._numberOfSheetsInFront).to.equal(0) }, 100);
-
+    setTimeout(() => {
+      expect(element.querySelectorAll('stacked-sheet')[0]._numberOfSheetsInFront).to.equal(2);
+    }, 100);
+    setTimeout(() => {
+      expect(element.querySelectorAll('stacked-sheet')[1]._numberOfSheetsInFront).to.equal(1);
+    }, 100);
+    setTimeout(() => {
+      expect(element.querySelectorAll('stacked-sheet')[2]._numberOfSheetsInFront).to.equal(0);
+    }, 100);
   });
- 
 });

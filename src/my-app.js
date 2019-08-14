@@ -27,25 +27,22 @@ class MyApp extends LitElement {
 
   get renderAddContact() {
     return html`
-      <stacked-sheet
-        title="New Contact">
-        <button @click="">Add contact</button>
+      <stacked-sheet width="80%" title="New Contact">
+        <button @click="${this.closeAll}">Close all</button>
       </stacked-sheet>
     `;
   }
 
   get renderNewService() {
     return html`
-      <stacked-sheet
-        title="New Service"
-        @opened-changed=${this.newServiceOpenedChanged}>
+      <stacked-sheet title="New Service" width="80%">
         <button @click="${this.addContact}">Add Implementation Contact</button>
       </stacked-sheet>
     `;
   }
 
-  newServiceOpenedChanged(e) {
-    this._newServiceOpened = e.detail.opened;
+  closeAll() {
+    this.sheetItems = [];
   }
 
   addContact() {
@@ -61,7 +58,7 @@ class MyApp extends LitElement {
   handleSheetClosed() {
     setTimeout(() => {
       this.sheetItems = this.sheetItems.filter(
-        (item, index) => index !== (this.sheetItems.length-1)
+        (item, index) => index !== this.sheetItems.length - 1,
       );
     }, 500);
   }
