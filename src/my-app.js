@@ -4,8 +4,8 @@ class MyApp extends LitElement {
   static get properties() {
     return {
       sheetItems: { type: Array },
-      _newServiceOpened: { type: Boolean},
-      _addContactOpened: { type: Boolean},
+      _newServiceOpened: { type: Boolean },
+      _addContactOpened: { type: Boolean },
     };
   }
 
@@ -27,30 +27,28 @@ class MyApp extends LitElement {
 
   get renderAddContact() {
     return html`
-        <stacked-sheet 
-          .opened="${this._addContactOpened}"
-          title="New Contact"
-          sheetOrder=2
-          sheetsTotal=2>
-
-          <button @click="">Add contact</button>
-          
-        </stacked-sheet>
+      <stacked-sheet
+        .opened="${this._addContactOpened}"
+        title="New Contact"
+        sheetOrder="2"
+        sheetsTotal="2"
+      >
+        <button @click="">Add contact</button>
+      </stacked-sheet>
     `;
   }
 
   get renderNewService() {
     return html`
-        <stacked-sheet 
-          .opened="${this._newServiceOpened}"
-          title="New Service"
-          @opened-changed=${this.newServiceOpenedChanged}
-          sheetOrder=1
-          sheetsTotal=2>
-
-          <button @click="${this.addContact}">Add Implementation Contact</button>
-
-        </stacked-sheet>
+      <stacked-sheet
+        .opened="${this._newServiceOpened}"
+        title="New Service"
+        @opened-changed=${this.newServiceOpenedChanged}
+        sheetOrder="1"
+        sheetsTotal="2"
+      >
+        <button @click="${this.addContact}">Add Implementation Contact</button>
+      </stacked-sheet>
     `;
   }
 
@@ -70,8 +68,7 @@ class MyApp extends LitElement {
   render() {
     return html`
       <stacked-sheets-holder>
-        ${this.renderNewService}
-        ${this.renderAddContact}
+        ${this.renderNewService} ${this.renderAddContact}
       </stacked-sheets-holder>
 
       <button @click="${this.newService}">New Service</button>

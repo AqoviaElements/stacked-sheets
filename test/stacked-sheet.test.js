@@ -23,8 +23,8 @@ describe('<stacked-sheet>', () => {
     const total = 2;
     const open = true;
     const element = await fixture(html`
-      <stacked-sheet 
-        opened=${open} 
+      <stacked-sheet
+        opened=${open}
         title="New Service"
         .sheetOrder=${order}
         .sheetsTotal=${total}
@@ -37,18 +37,13 @@ describe('<stacked-sheet>', () => {
     expect(element.sheetOrder).to.equal(1);
     expect(element.sheetsTotal).to.equal(2);
     expect(element.width).to.equal('90%');
-    
   });
 
   it('changing sheet order should update the offset', async () => {
     const order = 1;
     const total = 2;
     const element = await fixture(html`
-      <stacked-sheet 
-        .sheetOrder=${order}
-        .sheetsTotal=${total}
-      >
-      </stacked-sheet>
+      <stacked-sheet .sheetOrder=${order} .sheetsTotal=${total}> </stacked-sheet>
     `);
     expect(element.updateSheetPosition()).to.equal(-20);
   });
@@ -57,11 +52,7 @@ describe('<stacked-sheet>', () => {
     const order = 1;
     const total = 2;
     const element = await fixture(html`
-      <stacked-sheet 
-        .sheetOrder=${order}
-        .sheetsTotal=${total}
-      >
-      </stacked-sheet>
+      <stacked-sheet .sheetOrder=${order} .sheetsTotal=${total}> </stacked-sheet>
     `);
     expect(element.updateTransitionDelay()).to.equal(0.5);
   });
@@ -69,14 +60,11 @@ describe('<stacked-sheet>', () => {
   it('closing sheet should emit an event', async () => {
     const open = true;
     const element = await fixture(html`
-      <stacked-sheet
-        opened=${open}
-      >
-      </stacked-sheet>
+      <stacked-sheet opened=${open}> </stacked-sheet>
     `);
 
     expect(element.opened).to.equal(true);
-    
+
     setTimeout(() => element.closeSheet());
     const openedChanged = await oneEvent(element, 'opened-changed');
 
