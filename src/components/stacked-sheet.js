@@ -18,6 +18,7 @@ class StackedSheet extends LitElement {
     super();
     this.width = '100%';
     this.title = 'New Sheet';
+    this.opened = false;
     setTimeout(() => { this.opened = true }, 100);
   }
 
@@ -28,7 +29,6 @@ class StackedSheet extends LitElement {
 
   closeSheet() {
     this.opened = false;
-    // this.dispatchEvent(new CustomEvent('opened-changed', { detail: { opened: this.opened } }));
     const sheetClosedEvent = new CustomEvent("sheet-closed", { detail: {}, bubbles: true });
     this.dispatchEvent(sheetClosedEvent);
   }
