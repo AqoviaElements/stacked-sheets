@@ -3,9 +3,7 @@ import { LitElement, html, css } from 'lit-element';
 class StackedSheets extends LitElement {
   static get properties() {
     return {
-      sheetItems: { type: Array },
-      _newServiceOpened: { type: Boolean},
-      _addContactOpened: { type: Boolean},
+      sheetItems: { type: Array }
     };
   }
 
@@ -22,13 +20,11 @@ class StackedSheets extends LitElement {
   constructor() {
     super();
     this.sheetItems = [];
-    this._newServiceOpened = false;
   }
 
   get renderAddContact() {
     return html`
         <sheet-item 
-          .sheetVisible="${this._addContactOpened}"
           title="New Contact">
           <button @click="">Add contact</button>
         </sheet-item>
@@ -38,7 +34,6 @@ class StackedSheets extends LitElement {
   get renderNewService() {
     return html`
         <sheet-item 
-          .sheetVisible="${this._newServiceOpened}" 
           title="New Service">
           <button @click="${this.addContact}">Add Implementation Contact</button>
         </sheet-item>
@@ -46,23 +41,31 @@ class StackedSheets extends LitElement {
   }
 
   addContact() {
-    this._addContactOpened = true;
+    this.sheetItems = [...this.sheetItems, this.renderAddContact];
   }
 
   newService() {
-    this._newServiceOpened = true;
+    this.sheetItems = [...this.sheetItems, this.renderNewService];
+  }
+
+  handleSheetClosed() {
+    setTimeout(() => {
+      this.sheetItems = this.sheetItems.filter(
+        (item, index) => index !== (this.sheetItems.length-1)
+      );
+    }, 500);
   }
 
   render() {
     return html`
-      <sheet-items-holder>
-        ${this.renderNewService}
-        ${this.renderAddContact}
+      <sheet-items-holder @sheetClosed="${this.handleSheetClosed}">
+        ${this.sheetItems.map(sheet => sheet)}
       </sheet-items-holder>
 
       <button @click="${this.newService}">New Service</button>
     `;
   }
+
 }
 
 window.customElements.define('stacked-sheets', StackedSheets);

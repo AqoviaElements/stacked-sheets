@@ -1,18 +1,15 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html } from 'lit-element';
 
 class SheetItemsHolder extends LitElement {
-  static get properties() {
-    return {
-      sheetItems: { type: Array }
-    };
+
+  firstUpdated() {
+    this.addEventListener('sheetClosed', this.updateSheets);
+    this.addEventListener('sheetOpened', this.updateSheets);
   }
 
-  updated(changedProperties) {
-    let childElements = this.shadowRoot.querySelector("slot").assignedNodes();
-    console.log("Elements:" + childElements);
+  updateSheets() {
+    setTimeout(() => this.querySelectorAll('sheet-item').forEach(sheet => sheet.requestUpdate()), 100);
   }
-
-  
 
   render() {
     return html` 

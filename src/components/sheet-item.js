@@ -1,13 +1,11 @@
-import { LitElement, html, css, unsafeCSS } from 'lit-element';
+import { LitElement, html, unsafeCSS } from 'lit-element';
 import { SheetItemStyles } from '../styles/sheet-item-styles.js';
 
 class SheetItem extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      width: { type: Number },
       sheetVisible: { type: Boolean },
-      sheetOrder: { Number }
     };
   }
 
@@ -19,54 +17,47 @@ class SheetItem extends LitElement {
 
   constructor() {
     super();
-    this.width = 100;
     this.sheetVisible = false;
-    this.sheetOrder = 0;
+
+    setTimeout(() => { this.sheetVisible = true }, 100);
+  }
+
+  firstUpdated() {
+    const sheetClosedEvent = new CustomEvent("sheetOpened", { detail: {}, bubbles: true });
+    this.dispatchEvent(sheetClosedEvent);
   }
 
   closeSheet() {
     this.sheetVisible = false;
     
-    const sheetClosedEvent = new CustomEvent("sheetClosed", {
-      detail: {
-        sheetId: 0 // TODO: sheet id 
-      }
-    });
+    const sheetClosedEvent = new CustomEvent("sheetClosed", { detail: {}, bubbles: true });
     this.dispatchEvent(sheetClosedEvent);
-
-    this.addEventListener('sheetItemAdded', this._handleNewItem);
   }
 
-  _handleNewItem(e) {
-    this.activeSheets = e.detail.totalActiveSheets;
-
+  get sheetOffset() {
+    const pixelsOffset = 20;
+    return this.numberOfSheetsInFront * -1 * pixelsOffset;
   }
 
-  updated(changedProperties) {
-      let old = changedProperties.get('sheetVisible');
-      if (old && !this.sheetVisible) {
-        // this sheet closed
-        // emit sheet closed message with sheet id
-      } else if (!old && this.sheetVisible) {
-        // this sheet opened
-        //
-      }
+  get numberOfSheetsInFront() {
+    let count = 0;
+    let currentSheet = this;
 
-  }
+    while(currentSheet.nextElementSibling != null) {
+      currentSheet = currentSheet.nextElementSibling;
+      
+      if (currentSheet.sheetVisible)
+        count += 1;
+    }
 
-  updateSheetPosition() {
-    // const pixelsOffset = 20;
-    // return (this.sheetsCount - this.sheetOrder) * -1 * pixelsOffset;
-
-    return 0;
-
+    return count;
   }
 
   render() {
     return html`
     <style>
       .sheet.-is-open {
-        transform: translateX(${unsafeCSS(this.updateSheetPosition())}px);
+        transform: translateX(${unsafeCSS(this.sheetOffset)}px);
       }
     </style>
 
