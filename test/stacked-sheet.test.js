@@ -21,9 +21,10 @@ describe('<stacked-sheet>', () => {
   it('setting a property on the element works', async () => {
     const order = 1;
     const total = 2;
+    const open = true;
     const element = await fixture(html`
       <stacked-sheet 
-        opened=true 
+        opened=${open} 
         title="New Service"
         .sheetOrder=${order}
         .sheetsTotal=${total}
@@ -66,9 +67,10 @@ describe('<stacked-sheet>', () => {
   });
 
   it('closing sheet should emit an event', async () => {
+    const open = true;
     const element = await fixture(html`
       <stacked-sheet
-        opened=true
+        opened=${open}
       >
       </stacked-sheet>
     `);

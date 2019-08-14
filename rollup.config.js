@@ -99,6 +99,33 @@ export default args => {
         ]
     };
 
+    let myAppEs5 = {
+        input: ['src/my-app.js'],
+        output: {
+            file: `${dest}/my-app.es5.js`,
+            format: 'umd',
+            sourcemap: true,
+        },
+        plugins: [
+            ...basePlugins,
+            es5BabelTranspilation,
+            copyTask
+        ]
+    };
+
+    let myAppEs6 = {
+        input: ['src/my-app.js'],
+        output: {
+            file: `${dest}/my-app.js`,
+            format: 'es',
+            sourcemap: true,
+        },
+        plugins: [
+            ...basePlugins,
+            es6BabelTranspilation
+        ]
+    };
+
 
     if (args.demo) {
         let demoPlugins = [
@@ -112,5 +139,5 @@ export default args => {
         ];
     }
 
-    return [ stackedSheetEs5, stackedSheetEs6, stackedSheetsHolderEs5, stackedSheetsHolderEs6 ];
+    return [ stackedSheetEs5, stackedSheetEs6, stackedSheetsHolderEs5, stackedSheetsHolderEs6, myAppEs5, myAppEs6 ];
 } 
