@@ -45,10 +45,10 @@ export default args => {
     });
 
 
-    let sheetItemEs5 = {
-        input: ['src/components/sheet-item.js'],
+    let stackedSheetEs5 = {
+        input: ['src/components/stacked-sheet.js'],
         output: {
-            file: `${dest}/sheet-item.es5.js`,
+            file: `${dest}/stacked-sheet.es5.js`,
             format: 'umd',
             sourcemap: true,
         },
@@ -59,37 +59,37 @@ export default args => {
         ]
     };
 
-    let stackedSheetsEs5 = {
-        input: ['src/components/stacked-sheets.js'],
+    let stackedSheetEs6 = {
+        input: ['src/components/stacked-sheet.js'],
         output: {
-            file: `${dest}/stacked-sheets.es5.js`,
+            file: `${dest}/stacked-sheet.js`,
+            format: 'es',
+            sourcemap: true,
+        },
+        plugins: [
+            ...basePlugins,
+            es6BabelTranspilation
+        ]
+    };
+
+    let stackedSheetsHolderEs5 = {
+        input: ['src/components/stacked-sheets-holder.js'],
+        output: {
+            file: `${dest}/stacked-sheets-holder.es5.js`,
             format: 'umd',
             sourcemap: true,
         },
         plugins: [
             ...basePlugins,
-            es5BabelTranspilation
+            es5BabelTranspilation,
+            copyTask
         ]
     };
 
-
-    let sheetItemEs6 = {
-        input: ['src/components/sheet-item.js'],
+    let stackedSheetsHolderEs6 = {
+        input: ['src/components/stacked-sheets-holder.js'],
         output: {
-            file: `${dest}/sheet-item.js`,
-            format: 'es',
-            sourcemap: true,
-        },
-        plugins: [
-            ...basePlugins,
-            es6BabelTranspilation
-        ]
-    };
-    
-    let stackedSheetsEs6 = {
-        input: ['src/components/stacked-sheets.js'],
-        output: {
-            file: `${dest}/stacked-sheets.js`,
+            file: `${dest}/stacked-sheets-holder.js`,
             format: 'es',
             sourcemap: true,
         },
@@ -99,31 +99,6 @@ export default args => {
         ]
     };
 
-    let sheetItemsHolderEs6 = {
-        input: ['src/components/sheet-items-holder.js'],
-        output: {
-            file: `${dest}/sheet-items-holder.js`,
-            format: 'es',
-            sourcemap: true,
-        },
-        plugins: [
-            ...basePlugins,
-            es6BabelTranspilation
-        ]
-    };
-    
-    let sheetItemsHolderEs5 = {
-        input: ['src/components/sheet-items-holder.js'],
-        output: {
-            file: `${dest}/sheet-items-holder.es5.js`,
-            format: 'umd',
-            sourcemap: true,
-        },
-        plugins: [
-            ...basePlugins,
-            es5BabelTranspilation
-        ]
-    };
 
     if (args.demo) {
         let demoPlugins = [
@@ -131,11 +106,11 @@ export default args => {
             livereload({ watch: dest, exts: ['html', 'js'] })
         ];
     
-        stackedSheetsEs6.plugins = [
-            ...stackedSheetsEs6.plugins,
+        stackedSheetEs6.plugins = [
+            ...stackedSheetEs6.plugins,
             ...demoPlugins
         ];
     }
 
-    return [ stackedSheetsEs5, sheetItemEs5, stackedSheetsEs6, sheetItemEs6, sheetItemsHolderEs5, sheetItemsHolderEs6 ];
+    return [ stackedSheetEs5, stackedSheetEs6, stackedSheetsHolderEs5, stackedSheetsHolderEs6 ];
 } 

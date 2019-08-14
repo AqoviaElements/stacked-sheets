@@ -13,9 +13,9 @@ import serve from 'rollup-plugin-serve';
 import babelEs6 from './babel.es6.config';
 
 export default {
-  input: ['src/stacked-sheets.js'],
+  input: ['src/stacked-sheet.js'],
   output: {
-    file: 'demo/stacked-sheets.es6.js',
+    file: 'demo/stacked-sheet.es6.js',
     format: 'es',
     sourcemap: true,
   },

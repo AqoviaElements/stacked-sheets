@@ -1,12 +1,12 @@
 {
-  "name": "stacked-sheets",
-  "main": "src/stacked-sheets.js",
-  "module": "src/stacked-sheets.js",
+  "name": "stacked-sheet",
+  "main": "src/stacked-sheet.js",
+  "module": "src/stacked-sheet.js",
   "files": [
     "src"
   ],
   "version": "0.0.0",
-  "description": "Webcomponent stacked-sheets with lit-element and open-wc recommendations",
+  "description": "Webcomponent stacked-sheet with lit-element and open-wc recommendations",
   "license": "MIT",
   "dependencies": {
     "lit-element": "^2.0.1"

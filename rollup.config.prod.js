@@ -16,9 +16,9 @@ import babelEs6 from './babel.es6.config';
 
 export default [
   {
-    input: ['src/stacked-sheets.js'],
+    input: ['src/stacked-sheet.js'],
     output: {
-      file: 'dist/stacked-sheets.es5.js',
+      file: 'dist/stacked-sheet.es5.js',
       format: 'umd',
       sourcemap: true,
     },
@@ -48,9 +48,9 @@ export default [
     ],
   },
   {
-    input: ['src/stacked-sheets.js'],
+    input: ['src/stacked-sheet.js'],
     output: {
-      file: 'dist/stacked-sheets.es6.js',
+      file: 'dist/stacked-sheet.es6.js',
       format: 'es',
       sourcemap: true,
     },

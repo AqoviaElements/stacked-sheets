@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>stacked-sheets</title>
+    <title>stacked-sheet demo</title>
 
     <style>
       body {
@@ -15,20 +15,28 @@
       }
     </style>
   </head>
+
   <body>
     
-    <stacked-sheets>
-    </stacked-sheets>
+    <stacked-sheets-holder>
+      <stacked-sheet
+        title="Search for user"
+        opened=true
+        >
+        <h3>Search for user</h3>
+      </stacked-sheet>
+      <stacked-sheet
+        title="Add user"
+        opened=true
+        >
+      </stacked-sheet>
+    </stacked-sheets-holder>
 
     <script src="webcomponents-loader.js"></script>
-
-    
-    <script nomodule src="sheet-item.es5.js"></script>
-    <script nomodule src="sheet-items-holder.es5.js"></script>
-    <script nomodule src="stacked-sheets.es5.js"></script>
-    
-    <script type="module" src="sheet-item.js"></script>
-    <script type="module" src="sheet-items-holder.js"></script>
-    <script type="module" src="stacked-sheets.js"></script>
+    <script nomodule src="stacked-sheet.es5.js"></script>
+    <script nomodule src="stacked-sheets-holder.es5.js"></script>   
+    <script type="module" src="stacked-sheet.js"></script>
+    <script type="module" src="stacked-sheets-holder.js"></script>
   </body>
+
 </html>

@@ -1,19 +1,38 @@
-# \<stacked-sheets>
+# \<stacked-sheet>
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 ## Installation
 ```bash
-npm i stacked-sheets
+npm i stacked-sheet
 ```
 
 ## Usage
 ```html
 <script type="module">
-  import 'stacked-sheets/stacked-sheets.js';
+  import 'stacked-sheet/stacked-sheet.js';
+  import 'stacked-sheet/stacked-sheets-holder.js';
 </script>
 
-<stacked-sheets></stacked-sheets>
+<stacked-sheets-holder>
+  <stacked-sheet
+    title='Search for user'
+    .sheetOrder=0
+    .sheetsTotal=2>
+    <input type="text" name="search"/>
+    <button>Search</button>
+  </stacked-sheet>
+
+  <stacked-sheet
+    title='Add user'
+    .sheetOrder=1
+    .sheetsTotal=2>
+    <input type="text" name="fullname"/>
+    <button>Add</button>
+  </stacked-sheet>
+
+</stacked-sheets-holder>
+
 ```
 
 ## Linting

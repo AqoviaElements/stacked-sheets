@@ -1,78 +1,62 @@
 import { LitElement, html, css, unsafeCSS } from 'lit-element';
-import { SheetItemStyles } from '../styles/sheet-item-styles.js';
+import { StackedSheetStyles } from '../styles/stacked-sheet-styles.js';
 
-class SheetItem extends LitElement {
+class StackedSheet extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      width: { type: Number },
-      sheetVisible: { type: Boolean },
-      sheetOrder: { Number }
+      width: { type: String },
+      opened: { type: Boolean },
+      sheetOrder: { Number },
+      sheetsTotal: { Number }
     };
   }
 
   static get styles() {
     return [
-      SheetItemStyles
+      StackedSheetStyles
     ];
   }
 
   constructor() {
     super();
-    this.width = 100;
-    this.sheetVisible = false;
+    this.width = "100%";
+    this.opened = false;
     this.sheetOrder = 0;
+    this.sheetsTotal = 0;
+    this.title = "New Sheet";
   }
 
   closeSheet() {
-    this.sheetVisible = false;
-    
-    const sheetClosedEvent = new CustomEvent("sheetClosed", {
-      detail: {
-        sheetId: 0 // TODO: sheet id 
-      }
-    });
-    this.dispatchEvent(sheetClosedEvent);
-
-    this.addEventListener('sheetItemAdded', this._handleNewItem);
-  }
-
-  _handleNewItem(e) {
-    this.activeSheets = e.detail.totalActiveSheets;
-
-  }
-
-  updated(changedProperties) {
-      let old = changedProperties.get('sheetVisible');
-      if (old && !this.sheetVisible) {
-        // this sheet closed
-        // emit sheet closed message with sheet id
-      } else if (!old && this.sheetVisible) {
-        // this sheet opened
-        //
-      }
-
+    this.opened = false; 
+    this.dispatchEvent(new CustomEvent("opened-changed", { detail: { opened: this.opened }}));   
   }
 
   updateSheetPosition() {
-    // const pixelsOffset = 20;
-    // return (this.sheetsCount - this.sheetOrder) * -1 * pixelsOffset;
+     const vwOffset = 20;
+     return (this.sheetsTotal - this.sheetOrder) * -1 * vwOffset;
+  }
 
-    return 0;
-
+  updateTransitionDelay() {
+    const delay = 0.5;
+    return (this.sheetsTotal - this.sheetOrder) * delay;
   }
 
   render() {
     return html`
     <style>
       .sheet.-is-open {
-        transform: translateX(${unsafeCSS(this.updateSheetPosition())}px);
+        transform: translateX(${unsafeCSS(this.updateSheetPosition())}vw);
+        transition-delay: ${unsafeCSS(this.updateTransitionDelay)}s;
+      }
+      .sheet {
+        width: ${unsafeCSS(this.width)};
       }
     </style>
 
     ${this.svgTemplate}
 
-      <div class="sheet ${this.sheetVisible ? '-is-open' : ''}">
+      <div class="sheet ${this.opened ? '-is-open' : ''}">
 
         <header class="sheet__header">
           <h1 class="sheet__main-heading">${this.title}</h1>
@@ -103,4 +87,4 @@ class SheetItem extends LitElement {
   }
 }
 
-window.customElements.define('sheet-item', SheetItem);
+window.customElements.define('stacked-sheet', StackedSheet);
