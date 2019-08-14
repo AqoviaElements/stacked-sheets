@@ -2,11 +2,11 @@ import { css } from 'lit-element';
 
 export const SheetItemStyles = css`
 :host {
-  display: block;
-  color: black;
-}
-html {
+  --sheet-header-background-color: #003b77;
+  --sheet-header-text-color: #fff;
+  --sheet-header-font-family: "Museo-300", "Times New Roman", serif;
   box-sizing: border-box;
+  display: block;
 }
 *,
 :before,
@@ -33,9 +33,9 @@ svg {
 .sheet__header {
   display: flex;
   align-items: center;
-  padding: 0.5em 1em;
-  background-color: #2c5c8c;
-  color: #fff;
+  padding: 1.25em 1.5em;
+  background-color: var(--sheet-header-background-color);
+  color: var(--sheet-header-text-color);
 }
 .sheet__frame {
   position: relative;
@@ -44,15 +44,16 @@ svg {
   overflow-y: auto;
 }
 .sheet__content {
-  padding: 1em;
+  padding: 1.5em;
 }
 .sheet__footer {
-  padding: 1em;
+  padding: 1.5em;
   background-color: #fff;
   border-top: 1px solid #f4f4f4;
 }
 .sheet__close {
   display: block;
+  flex: 0 0 1em;
   width: 1em;
   height: 1em;
   cursor: pointer;
@@ -79,9 +80,12 @@ svg {
   transition-duration: 300ms, 1ms;
 }
 .sheet__main-heading {
-  flex: 1;
-  font-size: 1.5rem;
+  flex: 1 0 auto;
+  margin: 0;
+  font-size: 1.25em;
   font-weight: normal;
+  font-family: var(--sheet-header-font-family);
+  line-height: 1.2;
 }
 .sheet__heading {
   margin: 0 0 0.5em;
