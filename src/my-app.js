@@ -28,11 +28,7 @@ class MyApp extends LitElement {
   get renderAddContact() {
     return html`
       <stacked-sheet
-        .opened="${this._addContactOpened}"
-        title="New Contact"
-        sheetOrder="2"
-        sheetsTotal="2"
-      >
+        title="New Contact">
         <button @click="">Add contact</button>
       </stacked-sheet>
     `;
@@ -41,12 +37,8 @@ class MyApp extends LitElement {
   get renderNewService() {
     return html`
       <stacked-sheet
-        .opened="${this._newServiceOpened}"
         title="New Service"
-        @opened-changed=${this.newServiceOpenedChanged}
-        sheetOrder="1"
-        sheetsTotal="2"
-      >
+        @opened-changed=${this.newServiceOpenedChanged}>
         <button @click="${this.addContact}">Add Implementation Contact</button>
       </stacked-sheet>
     `;
@@ -63,12 +55,21 @@ class MyApp extends LitElement {
 
   newService() {
     this._newServiceOpened = true;
+    this.sheetItems = [...this.sheetItems, this.renderNewService];
+  }
+
+  handleSheetClosed() {
+    setTimeout(() => {
+      this.sheetItems = this.sheetItems.filter(
+        (item, index) => index !== (this.sheetItems.length-1)
+      );
+    }, 500);
   }
 
   render() {
     return html`
-      <stacked-sheets-holder>
-        ${this.renderNewService} ${this.renderAddContact}
+      <stacked-sheets-holder @sheet-closed="${this.handleSheetClosed}">
+        ${this.sheetItems.map(sheet => sheet)}
       </stacked-sheets-holder>
 
       <button @click="${this.newService}">New Service</button>

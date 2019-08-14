@@ -6,9 +6,7 @@ class StackedSheet extends LitElement {
     return {
       title: { type: String },
       width: { type: String },
-      opened: { type: Boolean },
-      sheetOrder: { Number },
-      sheetsTotal: { Number },
+      opened: { type: Boolean }
     };
   }
 
@@ -19,33 +17,51 @@ class StackedSheet extends LitElement {
   constructor() {
     super();
     this.width = '100%';
-    this.opened = false;
-    this.sheetOrder = 0;
-    this.sheetsTotal = 0;
     this.title = 'New Sheet';
+    setTimeout(() => { this.opened = true }, 100);
+  }
+
+  firstUpdated() {
+    const sheetOpenedEvent = new CustomEvent("sheet-opened", { detail: {}, bubbles: true });
+    this.dispatchEvent(sheetOpenedEvent);
   }
 
   closeSheet() {
     this.opened = false;
-    this.dispatchEvent(new CustomEvent('opened-changed', { detail: { opened: this.opened } }));
+    // this.dispatchEvent(new CustomEvent('opened-changed', { detail: { opened: this.opened } }));
+    const sheetClosedEvent = new CustomEvent("sheet-closed", { detail: {}, bubbles: true });
+    this.dispatchEvent(sheetClosedEvent);
   }
 
-  updateSheetPosition() {
-    const vwOffset = 20;
-    return (this.sheetsTotal - this.sheetOrder) * -1 * vwOffset;
+  get sheetOffset() {
+    const vwOffset = 0.5;
+    return this._numberOfSheetsInFront * -1 * vwOffset;
   }
-
-  updateTransitionDelay() {
+  
+  get sheetTransitionDelay() {
     const delay = 0.5;
-    return (this.sheetsTotal - this.sheetOrder) * delay;
+    return this._numberOfSheetsInFront * delay;
+  }
+  
+  get _numberOfSheetsInFront() {
+    let count = 0;
+    let currentSheet = this;
+    while(currentSheet.nextElementSibling != null) {
+      currentSheet = currentSheet.nextElementSibling;
+
+      if (currentSheet.opened)
+        count += 1;
+    }
+
+    return count;
   }
 
   render() {
     return html`
       <style>
         .sheet.-is-open {
-          transform: translateX(${unsafeCSS(this.updateSheetPosition())}vw);
-          transition-delay: ${unsafeCSS(this.updateTransitionDelay())}s;
+          transform: translateX(${unsafeCSS(this.sheetOffset)}vw);
+          transition-delay: ${unsafeCSS(this.sheetTransitionDelay)}s;
         }
         .sheet {
           width: ${unsafeCSS(this.width)};
