@@ -16,17 +16,13 @@ npm i stacked-sheet
 
 <stacked-sheets-holder>
   <stacked-sheet
-    title='Search for user'
-    .sheetOrder=0
-    .sheetsTotal=2>
+    title='Search for user'>
     <input type="text" name="search"/>
     <button>Search</button>
   </stacked-sheet>
 
   <stacked-sheet
-    title='Add user'
-    .sheetOrder=1
-    .sheetsTotal=2>
+    title='Add user'>
     <input type="text" name="fullname"/>
     <button>Add</button>
   </stacked-sheet>
