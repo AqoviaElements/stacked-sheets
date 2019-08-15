@@ -39,13 +39,11 @@ class MyApp extends LitElement {
   }
 
   closeAll() {
-    // todo how to close all sheets?
-    let elements = this.shadowRoot.querySelectorAll('stacked-sheet');
+    const elements = this.shadowRoot.querySelectorAll('stacked-sheet');
 
-    elements.forEach((el) => {
+    elements.forEach(el => {
       el.closeSheet();
     });
-
   }
 
   addContact() {
