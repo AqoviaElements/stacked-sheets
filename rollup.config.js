@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import analyze from 'rollup-plugin-analyzer';
 import babel from 'rollup-plugin-babel';
 import minify from 'rollup-plugin-babel-minify';
