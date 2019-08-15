@@ -1,10 +1,10 @@
-import { css } from 'lit-element';
+import { css } from "lit-element";
 
 export const StackedSheetStyles = css`
   :host {
     --sheet-header-background-color: #003b77;
     --sheet-header-text-color: #fff;
-    --sheet-header-font-family: 'Museo-300', 'Times New Roman', serif;
+    --sheet-header-font-family: "Museo-300", "Times New Roman", serif;
     --sheet-content-background-color: #f4f4f4;
     box-sizing: border-box;
     display: block;
@@ -28,8 +28,8 @@ export const StackedSheetStyles = css`
     transform: translateX(120%);
     transition: transform 350ms ease-in-out;
     background-color: var(--sheet-content-background-color);
-    box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.3), 0 0 24px 2px rgba(0, 0, 0, 0.24),
-      0 0 30px 5px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.3),
+      0 0 24px 2px rgba(0, 0, 0, 0.24), 0 0 30px 5px rgba(0, 0, 0, 0.22);
   }
   .sheet__header {
     display: flex;

@@ -1,15 +1,18 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html } from "lit-element";
 
 class StackedSheetsHolder extends LitElement {
   firstUpdated() {
-    this.addEventListener('sheet-closed', this.updateSheets);
-    this.addEventListener('sheet-opened', this.updateSheets);
+    this.addEventListener("sheet-closed", this.updateSheets);
+    this.addEventListener("sheet-opened", this.updateSheets);
   }
 
   updateSheets() {
     setTimeout(
-      () => this.querySelectorAll('stacked-sheet').forEach(sheet => sheet.requestUpdate()),
-      100,
+      () =>
+        this.querySelectorAll("stacked-sheet").forEach(sheet =>
+          sheet.requestUpdate()
+        ),
+      100
     );
   }
 
@@ -20,4 +23,4 @@ class StackedSheetsHolder extends LitElement {
   }
 }
 
-window.customElements.define('stacked-sheets-holder', StackedSheetsHolder);
+window.customElements.define("stacked-sheets-holder", StackedSheetsHolder);

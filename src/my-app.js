@@ -1,9 +1,9 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from "lit-element";
 
 class MyApp extends LitElement {
   static get properties() {
     return {
-      sheetItems: { type: Array },
+      sheetItems: { type: Array }
     };
   }
 
@@ -13,7 +13,7 @@ class MyApp extends LitElement {
         :host {
           display: block;
         }
-      `,
+      `
     ];
   }
 
@@ -39,7 +39,7 @@ class MyApp extends LitElement {
   }
 
   closeAll() {
-    const elements = this.shadowRoot.querySelectorAll('stacked-sheet');
+    const elements = this.shadowRoot.querySelectorAll("stacked-sheet");
 
     elements.forEach(el => {
       el.closeSheet();
@@ -57,7 +57,7 @@ class MyApp extends LitElement {
   handleSheetClosed() {
     setTimeout(() => {
       this.sheetItems = this.sheetItems.filter(
-        (item, index) => index !== this.sheetItems.length - 1,
+        (item, index) => index !== this.sheetItems.length - 1
       );
     }, 500);
   }
@@ -73,4 +73,4 @@ class MyApp extends LitElement {
   }
 }
 
-window.customElements.define('my-app', MyApp);
+window.customElements.define("my-app", MyApp);

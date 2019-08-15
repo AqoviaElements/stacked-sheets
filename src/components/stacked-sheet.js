@@ -1,12 +1,12 @@
-import { LitElement, html, unsafeCSS } from 'lit-element';
-import { StackedSheetStyles } from '../styles/stacked-sheet-styles.js';
+import { LitElement, html, unsafeCSS } from "lit-element";
+import { StackedSheetStyles } from "../styles/stacked-sheet-styles.js";
 
 class StackedSheet extends LitElement {
   static get properties() {
     return {
       title: { type: String },
       width: { type: String },
-      opened: { type: Boolean },
+      opened: { type: Boolean }
     };
   }
 
@@ -16,8 +16,8 @@ class StackedSheet extends LitElement {
 
   constructor() {
     super();
-    this.width = '100%';
-    this.title = 'New Sheet';
+    this.width = "100%";
+    this.title = "New Sheet";
     this.opened = false;
     setTimeout(() => {
       this.opened = true;
@@ -25,13 +25,19 @@ class StackedSheet extends LitElement {
   }
 
   firstUpdated() {
-    const sheetOpenedEvent = new CustomEvent('sheet-opened', { detail: {}, bubbles: true });
+    const sheetOpenedEvent = new CustomEvent("sheet-opened", {
+      detail: {},
+      bubbles: true
+    });
     this.dispatchEvent(sheetOpenedEvent);
   }
 
   closeSheet() {
     this.opened = false;
-    const sheetClosedEvent = new CustomEvent('sheet-closed', { detail: {}, bubbles: true });
+    const sheetClosedEvent = new CustomEvent("sheet-closed", {
+      detail: {},
+      bubbles: true
+    });
     this.dispatchEvent(sheetClosedEvent);
   }
 
@@ -71,7 +77,7 @@ class StackedSheet extends LitElement {
 
       ${this.svgTemplate}
 
-      <div class="sheet ${this.opened ? '-is-open' : ''}">
+      <div class="sheet ${this.opened ? "-is-open" : ""}">
         <header class="sheet__header">
           <h1 class="sheet__main-heading">${this.title}</h1>
           <span class="sheet__close" @click="${this.closeSheet}"
@@ -104,4 +110,4 @@ class StackedSheet extends LitElement {
   }
 }
 
-window.customElements.define('stacked-sheet', StackedSheet);
+window.customElements.define("stacked-sheet", StackedSheet);

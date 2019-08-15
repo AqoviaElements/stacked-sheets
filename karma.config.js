@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const createDefaultConfig = require('@open-wc/testing-karma/default-config');
-const merge = require('webpack-merge');
+const createDefaultConfig = require("@open-wc/testing-karma/default-config");
+const merge = require("webpack-merge");
 
 module.exports = config => {
   config.set(
@@ -11,18 +11,18 @@ module.exports = config => {
         //
         // npm run test -- --grep test/foo/bar.test.js
         // npm run test -- --grep test/bar/*
-        config.grep ? config.grep : 'test/**/*.test.js',
+        config.grep ? config.grep : "test/**/*.test.js"
       ],
 
       // you can overwrite/extend the config further
       coverageIstanbulReporter: {
         thresholds: {
           global: {
-            branches: 75,
-          },
-        },
-      },
-    }),
+            branches: 75
+          }
+        }
+      }
+    })
   );
   return config;
 };
