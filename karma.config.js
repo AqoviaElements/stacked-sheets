@@ -15,6 +15,13 @@ module.exports = config => {
       ],
 
       // you can overwrite/extend the config further
+      coverageIstanbulReporter: {
+        thresholds: {
+          global: {
+            branches: 75
+          },
+        },
+      }
     }),
   );
   return config;
