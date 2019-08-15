@@ -48,7 +48,7 @@ npm run test
 
 ## Demoing
 ```bash
-npm run start
+npm run demo
 ```
 
 ## Building
