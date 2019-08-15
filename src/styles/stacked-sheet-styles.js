@@ -21,7 +21,6 @@ export const StackedSheetStyles = css`
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 2000;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -67,7 +66,6 @@ export const StackedSheetStyles = css`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1;
     width: 100%;
     height: 100%;
     opacity: 0;
@@ -77,7 +75,6 @@ export const StackedSheetStyles = css`
   }
   .sheet.-is-open ~ .sheet-overlay {
     opacity: 1;
-    z-index: 1;
     transition-duration: 300ms, 1ms;
   }
   .sheet__main-heading {

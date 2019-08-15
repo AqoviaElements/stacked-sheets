@@ -51,6 +51,15 @@ class StackedSheet extends LitElement {
     return this._numberOfSheetsInFront * delay;
   }
 
+  get zIndex() {
+    const maxSheets = 1000;
+    return maxSheets - this._numberOfSheetsInFront * 2;
+  }
+
+  get overlayZIndex() {
+    return this.zIndex - 1;
+  }
+
   get _numberOfSheetsInFront() {
     let count = 0;
     let currentSheet = this;
@@ -69,9 +78,13 @@ class StackedSheet extends LitElement {
         .sheet.-is-open {
           transform: translateX(${unsafeCSS(this.sheetOffset)}vw);
           transition-delay: ${unsafeCSS(this.sheetTransitionDelay)}s;
+          z-index: ${unsafeCSS(this.zIndex)};
         }
         .sheet {
           width: ${unsafeCSS(this.width)};
+        }
+        .sheet.-is-open ~ .sheet-overlay {
+          z-index: ${unsafeCSS(this.overlayZIndex)};
         }
       </style>
 
