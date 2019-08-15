@@ -24,7 +24,6 @@ export const StackedSheetStyles = css`
     z-index: 2000;
     display: flex;
     flex-direction: column;
-    width: 90%;
     height: 100%;
     transform: translateX(120%);
     transition: transform 350ms ease-in-out;

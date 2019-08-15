@@ -63,6 +63,9 @@ class StackedSheet extends LitElement {
         .sheet.-is-open {
           transform: translateX(${unsafeCSS(this.sheetOffset)}vw);
           transition-delay: ${unsafeCSS(this.sheetTransitionDelay)}s;
+          
+        }
+        .sheet {
           width: ${unsafeCSS(this.width)};
         }
       </style>

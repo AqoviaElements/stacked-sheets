@@ -4,8 +4,6 @@ class MyApp extends LitElement {
   static get properties() {
     return {
       sheetItems: { type: Array },
-      _newServiceOpened: { type: Boolean },
-      _addContactOpened: { type: Boolean },
     };
   }
 
@@ -22,12 +20,11 @@ class MyApp extends LitElement {
   constructor() {
     super();
     this.sheetItems = [];
-    this._newServiceOpened = false;
   }
 
   get renderAddContact() {
     return html`
-      <stacked-sheet width="80%" title="New Contact">
+      <stacked-sheet width="60%" title="New Contact">
         <button @click="${this.closeAll}">Close all</button>
       </stacked-sheet>
     `;
@@ -42,16 +39,20 @@ class MyApp extends LitElement {
   }
 
   closeAll() {
-    this.sheetItems = [];
+    // todo how to close all sheets?
+    let elements = this.shadowRoot.querySelectorAll('stacked-sheet');
+
+    elements.forEach((el) => {
+      el.closeSheet();
+    });
+
   }
 
   addContact() {
-    this._addContactOpened = true;
     this.sheetItems = [...this.sheetItems, this.renderAddContact];
   }
 
   newService() {
-    this._newServiceOpened = true;
     this.sheetItems = [...this.sheetItems, this.renderNewService];
   }
 
