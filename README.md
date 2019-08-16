@@ -4,14 +4,14 @@ This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 
 ## Installation
 ```bash
-npm i stacked-sheet
+npm i @aqovia-elements/stacked-sheet
 ```
 
 ## Usage
 ```html
 <script type="module">
-  import 'stacked-sheet/stacked-sheet.js';
-  import 'stacked-sheet/stacked-sheets-holder.js';
+  import '@aqovia-elements/stacked-sheet/stacked-sheet.js';
+  import '@aqovia-elements/stacked-sheet/stacked-sheets-holder.js';
 </script>
 
 <stacked-sheets-holder>
