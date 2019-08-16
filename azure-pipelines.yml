@@ -70,5 +70,4 @@ steps:
     command: custom
     customCommand: 'publish --access public'
     customEndpoint: 'NpmRegistry'
-#  
-#  condition: eq(variables['Build.SourceBranchName'], 'master')
+  condition: eq(variables['Build.SourceBranchName'], 'master')
