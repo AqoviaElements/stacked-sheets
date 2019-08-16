@@ -1,11 +1,11 @@
 {
-  "name": "stacked-sheet",
+  "name": "@aqovia-elements/stacked-sheet",
   "main": "src/stacked-sheet.js",
   "module": "src/stacked-sheet.js",
   "files": [
     "src"
   ],
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Webcomponent stacked-sheet with lit-element and open-wc recommendations",
   "license": "MIT",
   "dependencies": {
