@@ -3,8 +3,10 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Hosted VS2017
+  demands: npm
 
+name: 1.0.$(BuildID)
 steps:
 - powershell: |
    $branchName = "$Env:Build_SourceBranchName"
@@ -24,11 +26,6 @@ steps:
 
   displayName: 'Calculate version'
   name: calculateVersion
-
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
 
 - task: Npm@1
   displayName: 'npm version'
