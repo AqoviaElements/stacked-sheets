@@ -1,0 +1,57 @@
+{
+  "name": "stacked-sheet",
+  "main": "src/stacked-sheet.js",
+  "module": "src/stacked-sheet.js",
+  "files": [
+    "src"
+  ],
+  "version": "0.0.0",
+  "description": "Webcomponent stacked-sheet with lit-element and open-wc recommendations",
+  "license": "MIT",
+  "dependencies": {
+    "lit-element": "^2.0.1"
+  },
+  "scripts": {
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "lint:eslint": "eslint --ext .js,.html .",
+    "format:eslint": "eslint --ext .js,.html . --fix",
+    "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "format:prettier": "prettier \"**/*.js\" --write",
+    "build": "del-cli dist && rollup -c rollup.config.js",
+    "demo": "del-cli demo && rollup -w -c rollup.config.js --demo",
+    "test": "karma start karma.config.js --coverage",
+    "test:watch": "karma start karma.config.js --auto-watch=true --single-run=false",
+    "test:es5": "karma start karma.config.js --legacy --coverage",
+    "test:es5:watch": "karma start karma.config.js --legacy --auto-watch=true --single-run=false"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.1",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
+    "@open-wc/eslint-config": "^0.4.3",
+    "@open-wc/prettier-config": "^0.1.10",
+    "@open-wc/testing": "^0.11.4",
+    "@open-wc/testing-karma": "^1.1.1",
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "fast-async": "^6.3.8",
+    "del-cli": "^2.0.0",
+    "rollup": "^1.10.1",
+    "rollup-plugin-analyzer": "^3.0.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-babel-minify": "^7.0.0",
+    "rollup-plugin-cleaner": "^0.2.0",
+    "rollup-plugin-copy": "^3.0.0",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-html-scaffold": "^0.1.2",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-progress": "^1.1.1",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-url": "^2.2.2",
+    "webpack-merge": "^4.2.1"
+  }
+}
