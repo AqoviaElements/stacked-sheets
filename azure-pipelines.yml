@@ -6,10 +6,36 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- powershell: |
+   $branchName = "$Env:Build_SourceBranchName"
+   
+   # Empty name when branch is master
+   if ($branchName -eq "master"){
+       $branchName = ""
+   } else {
+       $branchName = "-$branchName";
+   }
+   
+   $versionNumber = "$Env:Build_BuildNumber$branchName";
+   Write-Host "Calculated version: $versionNumber"
+   
+   # Setting variable
+   Write-Host "##vso[task.setvariable variable=versionNumber;isOutput=true]$versionNumber"
+
+  displayName: 'Calculate version'
+  name: calculateVersion
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
+
+- task: Npm@1
+  displayName: 'npm version'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'version $(calculateVersion.versionNumber) --no-git-tag-version'
 
 - script: |
     npm install
@@ -40,3 +66,9 @@ steps:
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
     reportDirectory: '$(System.DefaultWorkingDirectory)/**/test-coverage'
   displayName: 'Publish Code Coverage Results'
+
+- task: Npm@1
+  inputs:
+    command: publish
+    publishEndpoint: 'NpmRegistry'
+  condition: eq(variables['Build.SourceBranchName'], 'master')
