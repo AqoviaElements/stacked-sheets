@@ -47,6 +47,10 @@ steps:
   displayName: 'Run JS Linting'
 
 - script: |
+    npm run pipelines-npm-audit
+  displayName: 'Run NPM Auditing'
+
+- script: |
     npm run test 
   displayName: 'Run unit test'
 

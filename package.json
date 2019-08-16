@@ -20,6 +20,7 @@
     "format:prettier": "prettier \"**/*.js\" --write",
     "build": "del-cli dist && rollup -c rollup.config.js",
     "demo": "del-cli demo && rollup -w -c rollup.config.js --demo",
+    "pipelines-npm-audit": "node build_scripts/pipelines-npm-audit",
     "test": "karma start karma.config.js --coverage",
     "test:watch": "karma start karma.config.js --auto-watch=true --single-run=false",
     "test:es5": "karma start karma.config.js --legacy --coverage",
@@ -28,8 +29,6 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.1",
-    "@commitlint/cli": "^7.5.2",
-    "@commitlint/config-conventional": "^7.5.0",
     "@open-wc/eslint-config": "^0.4.3",
     "@open-wc/prettier-config": "^0.1.10",
     "@open-wc/testing": "^0.11.4",
