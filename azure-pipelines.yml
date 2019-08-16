@@ -64,8 +64,8 @@ steps:
     reportDirectory: '$(System.DefaultWorkingDirectory)/**/test-coverage'
   displayName: 'Publish Code Coverage Results'
 
-- task: Npm@1
+- task: Npm@2
   inputs:
-    command: publish
+    command: publish --access public
     publishEndpoint: 'NpmRegistry'
   condition: eq(variables['Build.SourceBranchName'], 'master')
