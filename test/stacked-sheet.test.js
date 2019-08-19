@@ -13,7 +13,7 @@ describe("<stacked-sheet>", () => {
     expect(element.sheetOffset).to.equal(0);
 
     // default transition delay should be 0
-    expect(element.sheetTransitionDelay).to.equal(0);
+    expect(element.sheetCloseDelay).to.equal(0);
   });
 
   it("setting a property on the element works", async () => {
