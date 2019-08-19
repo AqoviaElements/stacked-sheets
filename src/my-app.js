@@ -24,7 +24,7 @@ class MyApp extends LitElement {
 
   get renderAddContact() {
     return html`
-      <stacked-sheet width="60%" title="New Contact">
+      <stacked-sheet width="80%" title="New Contact">
         <button @click="${this.closeAll}">Close all</button>
       </stacked-sheet>
     `;

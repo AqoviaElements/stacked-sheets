@@ -33,12 +33,18 @@ class StackedSheet extends LitElement {
   }
 
   closeSheet() {
-    this.opened = false;
-    const sheetClosedEvent = new CustomEvent("sheet-closed", {
-      detail: {},
-      bubbles: true
-    });
-    this.dispatchEvent(sheetClosedEvent);
+    setTimeout(
+      () => {
+        this.opened = false;
+        const sheetClosedEvent = new CustomEvent("sheet-closed", {
+          detail: {},
+          bubbles: true
+        });
+        this.dispatchEvent(sheetClosedEvent);
+      },
+      this.sheetCloseDelay * 1000
+    );
+
   }
 
   get sheetOffset() {
@@ -46,8 +52,8 @@ class StackedSheet extends LitElement {
     return this._numberOfSheetsInFront * -1 * vwOffset;
   }
 
-  get sheetTransitionDelay() {
-    const delay = 0.5;
+  get sheetCloseDelay() {
+    const delay = 0.1;
     return this._numberOfSheetsInFront * delay;
   }
 
@@ -71,17 +77,17 @@ class StackedSheet extends LitElement {
 
     return count;
   }
-
+  
   render() {
     return html`
       <style>
         .sheet.-is-open {
           transform: translateX(${unsafeCSS(this.sheetOffset)}vw);
-          transition-delay: ${unsafeCSS(this.sheetTransitionDelay)}s;
           z-index: ${unsafeCSS(this.zIndex)};
         }
         .sheet {
-          width: ${unsafeCSS(this.width)};
+          z-index: ${unsafeCSS(this.zIndex)};
+          width: ${unsafeCSS(this.width)};  
         }
         .sheet.-is-open ~ .sheet-overlay {
           z-index: ${unsafeCSS(this.overlayZIndex)};
