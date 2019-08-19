@@ -24,7 +24,6 @@ export const StackedSheetStyles = css`
     display: flex;
     flex-direction: column;
     height: 100%;
-    transform: translateX(120%);
     transition: transform 350ms ease-in-out;
     background-color: var(--sheet-content-background-color);
     box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.3),

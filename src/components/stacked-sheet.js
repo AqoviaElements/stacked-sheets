@@ -1,4 +1,5 @@
-import { LitElement, html, unsafeCSS } from "lit-element";
+import { LitElement, html } from "lit-element";
+import { styleMap } from "lit-html/directives/style-map.js";
 import { StackedSheetStyles } from "../styles/stacked-sheet-styles.js";
 
 class StackedSheet extends LitElement {
@@ -75,24 +76,23 @@ class StackedSheet extends LitElement {
   }
 
   render() {
-    return html`
-      <style>
-        .sheet.-is-open {
-          transform: translateX(${unsafeCSS(this.sheetOffset)}vw);
-          z-index: ${unsafeCSS(this.zIndex)};
-        }
-        .sheet {
-          z-index: ${unsafeCSS(this.zIndex)};
-          width: ${unsafeCSS(this.width)};
-        }
-        .sheet.-is-open ~ .sheet-overlay {
-          z-index: ${unsafeCSS(this.overlayZIndex)};
-        }
-      </style>
+    const sheetOverlayStyle = {
+      "z-index": this.overlayZIndex
+    };
 
+    const sheetStyle = {
+      "z-index": this.zIndex,
+      width: this.width,
+      transform: `translateX(${this.opened ? `${this.sheetOffset}vw` : "120%"})`
+    };
+
+    return html`
       ${this.svgTemplate}
 
-      <div class="sheet ${this.opened ? "-is-open" : ""}">
+      <div
+        class="sheet ${this.opened ? "-is-open" : ""}"
+        style="${styleMap(sheetStyle)}"
+      >
         <header class="sheet__header">
           <h1 class="sheet__main-heading">${this.title}</h1>
           <span class="sheet__close" @click="${this.closeSheet}"
@@ -107,7 +107,7 @@ class StackedSheet extends LitElement {
         </div>
       </div>
 
-      <div class="sheet-overlay"></div>
+      <div class="sheet-overlay" style="${styleMap(sheetOverlayStyle)}"></div>
     `;
   }
 
