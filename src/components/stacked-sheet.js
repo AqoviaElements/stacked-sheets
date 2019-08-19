@@ -44,7 +44,7 @@ class StackedSheet extends LitElement {
   }
 
   get sheetOffset() {
-    const vwOffset = 0.5;
+    const vwOffset = 5;
     return this._numberOfSheetsInFront * -1 * vwOffset;
   }
 
