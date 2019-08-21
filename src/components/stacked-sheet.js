@@ -7,6 +7,7 @@ class StackedSheet extends LitElement {
     return {
       title: { type: String },
       width: { type: String },
+      maxWidth: { type: String },
       opened: { type: Boolean }
     };
   }
@@ -18,6 +19,7 @@ class StackedSheet extends LitElement {
   constructor() {
     super();
     this.width = "100%";
+    this.maxWidth = "auto";
     this.title = "New Sheet";
     this.opened = false;
     setTimeout(() => {
@@ -83,6 +85,7 @@ class StackedSheet extends LitElement {
     const sheetStyle = {
       "z-index": this.zIndex,
       width: this.width,
+      "max-width": this.maxWidth,
       transform: `translateX(${this.opened ? `${this.sheetOffset}vw` : "120%"})`
     };
 
