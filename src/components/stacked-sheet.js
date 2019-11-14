@@ -19,7 +19,7 @@ class StackedSheet extends LitElement {
   constructor() {
     super();
     this.width = "100%";
-    this.maxWidth = "auto";
+    this.maxWidth = "none";
     this.title = "New Sheet";
     this.opened = false;
     setTimeout(() => {
