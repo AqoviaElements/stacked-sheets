@@ -4,7 +4,6 @@ import minify from "rollup-plugin-babel-minify";
 import copy from "rollup-plugin-copy";
 import filesize from "rollup-plugin-filesize";
 import resolve from "rollup-plugin-node-resolve";
-import progress from "rollup-plugin-progress";
 import replace from "rollup-plugin-replace";
 import json from "rollup-plugin-json";
 import url from "rollup-plugin-url";
@@ -21,7 +20,6 @@ export default args => {
   });
 
   const basePlugins = [
-    progress(),
     replace({ "process.env.NODE_ENV": JSON.stringify(buildType) }),
     resolve(),
     minify({ comments: false }),
