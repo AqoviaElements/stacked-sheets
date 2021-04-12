@@ -1,4 +1,5 @@
 import { LitElement, html } from "lit-element";
+import { nothing } from "lit-html";
 import { styleMap } from "lit-html/directives/style-map.js";
 import { StackedSheetStyles } from "../styles/stacked-sheet-styles.js";
 
@@ -8,7 +9,8 @@ class StackedSheet extends LitElement {
       title: { type: String },
       width: { type: String },
       maxWidth: { type: String },
-      opened: { type: Boolean }
+      opened: { type: Boolean },
+      hideOverlay: { type: Boolean }
     };
   }
 
@@ -22,6 +24,7 @@ class StackedSheet extends LitElement {
     this.maxWidth = "none";
     this.title = "New Sheet";
     this.opened = false;
+    this.hideOverlay = false;
     setTimeout(() => {
       this.opened = true;
     }, 100);
@@ -89,6 +92,10 @@ class StackedSheet extends LitElement {
       transform: `translateX(${this.opened ? `${this.sheetOffset}vw` : "120%"})`
     };
 
+    const sheetOverlayElement = html`
+      <div class="sheet-overlay" style="${styleMap(sheetOverlayStyle)}"></div>
+    `;
+
     return html`
       ${this.svgTemplate}
 
@@ -110,7 +117,7 @@ class StackedSheet extends LitElement {
         </div>
       </div>
 
-      <div class="sheet-overlay" style="${styleMap(sheetOverlayStyle)}"></div>
+      ${this.hideOverlay ? nothing : sheetOverlayElement}
     `;
   }
 

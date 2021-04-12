@@ -11,6 +11,7 @@ describe("<stacked-sheet>", () => {
 
     // default offset should be 0
     expect(element.sheetOffset).to.equal(0);
+    expect(element.hideOverlay).to.equal(false);
 
     // default transition delay should be 0
     expect(element.sheetCloseDelay).to.equal(0);
@@ -66,5 +67,14 @@ describe("<stacked-sheet>", () => {
         element.querySelectorAll("stacked-sheet")[2]._numberOfSheetsInFront
       ).to.equal(0);
     }, 100);
+  });
+
+  it("setting overlay to be hidden shouldn't render overlay", async () => {
+    const element = await fixture(html`
+      <stacked-sheet ?hideOverlay=${true}></stacked-sheet>
+    `);
+
+    expect(element.hideOverlay).to.equal(true);
+    expect(element.shadowRoot.querySelector(".sheet-overlay")).to.equal(null);
   });
 });
