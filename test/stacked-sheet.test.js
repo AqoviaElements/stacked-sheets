@@ -28,6 +28,28 @@ describe("<stacked-sheet>", () => {
     expect(element.width).to.equal("90%");
   });
 
+  it("footer should be hidden by default", async () => {
+    const element = await fixture(html`
+      <stacked-sheet title="New Service" width="90%"> </stacked-sheet>
+    `);
+
+    const footer = element.shadowRoot.querySelector("footer");
+    expect(footer).to.equal(null);
+  });
+
+  it("footer should be visible if set", async () => {
+    const element = await fixture(html`
+      <stacked-sheet title="New Service" width="90%" ?showFooter=${true}>
+        <div slot="footer">
+          <button>Cancel</button>
+        </div>
+      </stacked-sheet>
+    `);
+
+    const footer = element.shadowRoot.querySelector("footer");
+    expect(footer).to.not.equal(null);
+  });
+
   it("closing sheet should emit an event", async () => {
     const element = await fixture(html`
       <stacked-sheet> </stacked-sheet>
