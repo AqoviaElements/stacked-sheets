@@ -47,8 +47,10 @@ export const StackedSheetStyles = css`
   }
   .sheet__footer {
     padding: 1.5em;
+    flex: 0 0 auto;
     background-color: #fff;
     border-top: 1px solid #f4f4f4;
+    text-align: var(--sheet-footer-text-align, right);
   }
   .sheet__close {
     display: block;

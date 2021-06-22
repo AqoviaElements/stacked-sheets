@@ -32,8 +32,16 @@ class MyApp extends LitElement {
 
   get renderNewService() {
     return html`
-      <stacked-sheet title="New Service" width="80%" maxWidth="770px">
+      <stacked-sheet
+        title="New Service"
+        width="80%"
+        maxWidth="770px"
+        ?showFooter=${true}
+      >
         <button @click="${this.addContact}">Add Implementation Contact</button>
+        <div slot="footer">
+          <button>Next</button>
+        </div>
       </stacked-sheet>
     `;
   }

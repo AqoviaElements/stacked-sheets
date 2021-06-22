@@ -10,7 +10,8 @@ class StackedSheet extends LitElement {
       width: { type: String },
       maxWidth: { type: String },
       opened: { type: Boolean },
-      hideOverlay: { type: Boolean }
+      hideOverlay: { type: Boolean },
+      showFooter: { type: Boolean }
     };
   }
 
@@ -25,6 +26,7 @@ class StackedSheet extends LitElement {
     this.title = "New Sheet";
     this.opened = false;
     this.hideOverlay = false;
+    this.showFooter = false;
     setTimeout(() => {
       this.opened = true;
     }, 100);
@@ -115,6 +117,14 @@ class StackedSheet extends LitElement {
             <slot></slot>
           </div>
         </div>
+
+        ${this.showFooter
+          ? html`
+              <footer class="sheet__footer">
+                <slot name="footer"></slot>
+              </footer>
+            `
+          : nothing}
       </div>
 
       ${this.hideOverlay ? nothing : sheetOverlayElement}
