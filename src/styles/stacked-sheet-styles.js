@@ -85,5 +85,6 @@ export const StackedSheetStyles = css`
     font-weight: normal;
     font-family: var(--sheet-header-font-family);
     line-height: 1.2;
+    max-width: calc(100% - 1em);
   }
 `;
