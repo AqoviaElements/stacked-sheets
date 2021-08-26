@@ -108,7 +108,7 @@ class StackedSheet extends LitElement {
         <header class="sheet__header">
           <h1 class="sheet__main-heading">${this.title}</h1>
           <span class="sheet__close" @click="${this.closeSheet}"
-            ><svg><use xlink:href="#cross" /></svg
+            ><svg><use xlink:href="#close" /></svg
           ></span>
         </header>
 
