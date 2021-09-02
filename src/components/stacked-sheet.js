@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit-element";
 import { nothing } from "lit-html";
+import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 import { styleMap } from "lit-html/directives/style-map.js";
 import { StackedSheetStyles } from "../styles/stacked-sheet-styles.js";
 
@@ -38,6 +39,9 @@ class StackedSheet extends LitElement {
       bubbles: true
     });
     this.dispatchEvent(sheetOpenedEvent);
+    if (this._numberOfSheetsBefore === 0) {
+      disableBodyScroll(this);
+    }
   }
 
   closeSheet() {
@@ -49,6 +53,10 @@ class StackedSheet extends LitElement {
       });
       this.dispatchEvent(sheetClosedEvent);
     }, this.sheetCloseDelay * 1000);
+
+    if (this._numberOfSheetsBefore === 0) {
+      clearAllBodyScrollLocks();
+    }
   }
 
   get sheetOffset() {
@@ -75,6 +83,18 @@ class StackedSheet extends LitElement {
     let currentSheet = this;
     while (currentSheet.nextElementSibling != null) {
       currentSheet = currentSheet.nextElementSibling;
+
+      if (currentSheet.opened) count += 1;
+    }
+
+    return count;
+  }
+
+  get _numberOfSheetsBefore() {
+    let count = 0;
+    let currentSheet = this;
+    while (currentSheet.previousElementSibling != null) {
+      currentSheet = currentSheet.previousElementSibling;
 
       if (currentSheet.opened) count += 1;
     }

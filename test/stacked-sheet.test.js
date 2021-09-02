@@ -65,7 +65,7 @@ describe("<stacked-sheet>", () => {
     expect(element.opened).to.equal(false);
   });
 
-  it("sheets should be aware of number of sheets in front", async () => {
+  it("sheets should be aware of number of sheets in front and before", async () => {
     const element = await fixture(html`
       <stacked-sheets-holder>
         <stacked-sheet> </stacked-sheet>
@@ -78,16 +78,25 @@ describe("<stacked-sheet>", () => {
       expect(
         element.querySelectorAll("stacked-sheet")[0]._numberOfSheetsInFront
       ).to.equal(2);
+      expect(
+        element.querySelectorAll("stacked-sheet")[0]._numberOfSheetsBefore
+      ).to.equal(0);
     }, 100);
     setTimeout(() => {
       expect(
         element.querySelectorAll("stacked-sheet")[1]._numberOfSheetsInFront
+      ).to.equal(1);
+      expect(
+        element.querySelectorAll("stacked-sheet")[1]._numberOfSheetsBefore
       ).to.equal(1);
     }, 100);
     setTimeout(() => {
       expect(
         element.querySelectorAll("stacked-sheet")[2]._numberOfSheetsInFront
       ).to.equal(0);
+      expect(
+        element.querySelectorAll("stacked-sheet")[2]._numberOfSheetsBefore
+      ).to.equal(2);
     }, 100);
   });
 
