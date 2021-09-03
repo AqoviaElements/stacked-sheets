@@ -23,10 +23,10 @@
     "build": "del-cli dist && rollup -c rollup.config.js",
     "demo": "del-cli demo && rollup -w -c rollup.config.js --demo",
     "pipelines-npm-audit": "node build_scripts/pipelines-npm-audit",
-    "test": "karma start karma.config.js --coverage",
-    "test:watch": "karma start karma.config.js --auto-watch=true --single-run=false",
-    "test:es5": "karma start karma.config.js --legacy --coverage",
-    "test:es5:watch": "karma start karma.config.js --legacy --auto-watch=true --single-run=false"
+    "test": "karma start --coverage",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:es5": "karma start --legacy --coverage",
+    "test:es5:watch": "karma start --legacy --auto-watch=true --single-run=false"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -34,7 +34,7 @@
     "@open-wc/eslint-config": "^0.4.3",
     "@open-wc/prettier-config": "^0.1.10",
     "@open-wc/testing": "^2.5.33",
-    "@open-wc/testing-karma": "^4.0.2",
+    "@open-wc/testing-karma": "^4.0.9",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "del-cli": "^4.0.1",
     "fast-async": "^6.3.8",
