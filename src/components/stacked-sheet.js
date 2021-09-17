@@ -40,7 +40,7 @@ class StackedSheet extends LitElement {
     });
     this.dispatchEvent(sheetOpenedEvent);
     if (this._numberOfSheetsBefore === 0) {
-      disableBodyScroll(this);
+      disableBodyScroll(this, { allowTouchMove: true });
     }
   }
 
