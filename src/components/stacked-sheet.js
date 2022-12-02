@@ -12,7 +12,7 @@ class StackedSheet extends LitElement {
       maxWidth: { type: String },
       opened: { type: Boolean },
       hideOverlay: { type: Boolean },
-      showFooter: { type: Boolean }
+      showFooter: { type: Boolean },
     };
   }
 
@@ -36,7 +36,7 @@ class StackedSheet extends LitElement {
   firstUpdated() {
     const sheetOpenedEvent = new CustomEvent("sheet-opened", {
       detail: {},
-      bubbles: true
+      bubbles: true,
     });
     this.dispatchEvent(sheetOpenedEvent);
     if (this._numberOfSheetsBefore === 0) {
@@ -49,7 +49,7 @@ class StackedSheet extends LitElement {
       this.opened = false;
       const sheetClosedEvent = new CustomEvent("sheet-closed", {
         detail: {},
-        bubbles: true
+        bubbles: true,
       });
       this.dispatchEvent(sheetClosedEvent);
     }, this.sheetCloseDelay * 1000);
@@ -104,14 +104,16 @@ class StackedSheet extends LitElement {
 
   render() {
     const sheetOverlayStyle = {
-      "z-index": this.overlayZIndex
+      "z-index": this.overlayZIndex,
     };
 
     const sheetStyle = {
       "z-index": this.zIndex,
       width: this.width,
       "max-width": this.maxWidth,
-      transform: `translateX(${this.opened ? `${this.sheetOffset}vw` : "120%"})`
+      transform: `translateX(${
+        this.opened ? `${this.sheetOffset}vw` : "120%"
+      })`,
     };
 
     const sheetOverlayElement = html`

@@ -1,9 +1,11 @@
-import { LitElement, html, css } from "lit-element";
+import { html, css, LitElement } from "lit";
+import "./components/stacked-sheet.js";
+import "./components/stacked-sheets-holder.js";
 
-class MyApp extends LitElement {
+export class MyApp extends LitElement {
   static get properties() {
     return {
-      sheetItems: { type: Array }
+      sheetItems: { type: Array },
     };
   }
 
@@ -13,7 +15,7 @@ class MyApp extends LitElement {
         :host {
           display: block;
         }
-      `
+      `,
     ];
   }
 
@@ -80,5 +82,3 @@ class MyApp extends LitElement {
     `;
   }
 }
-
-window.customElements.define("my-app", MyApp);

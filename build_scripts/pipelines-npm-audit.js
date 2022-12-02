@@ -27,7 +27,7 @@ exec(command, (error, stdout) => {
     low: [],
     moderate: [],
     high: [],
-    critical: []
+    critical: [],
   };
 
   const output = stdout.split("\n").map(_ => _.split("\t"));
@@ -39,7 +39,7 @@ exec(command, (error, stdout) => {
       package: entry[PACKAGE_COLUMN],
       resolution: entry[RESOLUTION_COLUMN],
       issue: entry[ISSUE_COLUMN],
-      dependency: entry[DEPENDENCY_COLUMN]
+      dependency: entry[DEPENDENCY_COLUMN],
     });
   });
 
