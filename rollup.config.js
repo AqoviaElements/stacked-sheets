@@ -7,12 +7,10 @@ import resolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 import json from "rollup-plugin-json";
 import url from "rollup-plugin-url";
-import livereload from "rollup-plugin-livereload";
-import serve from "rollup-plugin-serve";
 
-export default args => {
-  const dest = args.demo ? "demo" : "dist";
-  const buildType = args.demo ? "development" : "production";
+export default () => {
+  const dest = "dist";
+  const buildType = "production";
 
   const es5BabelTranspilation = babel();
   const es6BabelTranspilation = babel({
@@ -110,15 +108,6 @@ export default args => {
     },
     plugins: [...basePlugins, es6BabelTranspilation],
   };
-
-  if (args.demo) {
-    const demoPlugins = [
-      serve({ contentBase: dest, verbose: true, port: 8999 }),
-      livereload({ watch: dest, exts: ["html", "js"] }),
-    ];
-
-    stackedSheetEs6.plugins = [...stackedSheetEs6.plugins, ...demoPlugins];
-  }
 
   return [
     stackedSheetEs5,
