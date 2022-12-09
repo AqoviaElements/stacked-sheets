@@ -19,6 +19,7 @@
     "test:watch": "web-test-runner --watch"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.20.2",
     "body-scroll-lock": "^4.0.0-beta.0",
     "lit": "^2.0.2",
     "lit-element": "^2.0.1",
@@ -27,8 +28,8 @@
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",
     "@open-wc/eslint-config": "^4.3.0",
-    "@open-wc/testing": "next",
     "@open-wc/prettier-config": "^0.1.10",
+    "@open-wc/testing": "next",
     "@web/dev-server": "^0.1.28",
     "@web/test-runner": "^0.13.22",
     "del-cli": "^4.0.1",
