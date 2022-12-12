@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "MyApp",
+          "declaration": {
+            "name": "MyApp",
+            "module": "./src/my-app.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "stacked-sheets.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "stacked-sheets",
+          "declaration": {
+            "name": "MyApp",
+            "module": "/src/my-app.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "build_scripts/pipelines-npm-audit.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/my-app.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "MyApp",
+          "members": [
+            {
+              "kind": "field",
+              "name": "renderAddContact"
+            },
+            {
+              "kind": "field",
+              "name": "renderNewService"
+            },
+            {
+              "kind": "method",
+              "name": "closeAll"
+            },
+            {
+              "kind": "method",
+              "name": "addContact"
+            },
+            {
+              "kind": "method",
+              "name": "newService"
+            },
+            {
+              "kind": "method",
+              "name": "handleSheetClosed"
+            },
+            {
+              "kind": "field",
+              "name": "sheetItems",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]",
+              "privacy": "public",
+              "attribute": "sheetItems"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "sheetItems",
+              "fieldName": "sheetItems"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "stacked-sheets",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "MyApp",
+          "declaration": {
+            "name": "MyApp",
+            "module": "src/my-app.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "stories/index.stories.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "Regular"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomTitle"
+        },
+        {
+          "kind": "variable",
+          "name": "CustomCounter"
+        },
+        {
+          "kind": "variable",
+          "name": "SlottedContent"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "stories/index.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Regular",
+          "declaration": {
+            "name": "Regular",
+            "module": "stories/index.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomTitle",
+          "declaration": {
+            "name": "CustomTitle",
+            "module": "stories/index.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CustomCounter",
+          "declaration": {
+            "name": "CustomCounter",
+            "module": "stories/index.stories.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "SlottedContent",
+          "declaration": {
+            "name": "SlottedContent",
+            "module": "stories/index.stories.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/block-navigation.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/prettify.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/sorter.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/stacked-sheet.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StackedSheet",
+          "members": [
+            {
+              "kind": "method",
+              "name": "closeSheet"
+            },
+            {
+              "kind": "field",
+              "name": "sheetOffset"
+            },
+            {
+              "kind": "field",
+              "name": "sheetCloseDelay"
+            },
+            {
+              "kind": "field",
+              "name": "zIndex"
+            },
+            {
+              "kind": "field",
+              "name": "overlayZIndex"
+            },
+            {
+              "kind": "field",
+              "name": "_numberOfSheetsInFront"
+            },
+            {
+              "kind": "field",
+              "name": "_numberOfSheetsBefore"
+            },
+            {
+              "kind": "field",
+              "name": "svgTemplate"
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "default": "'100%'",
+              "privacy": "public",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "maxWidth",
+              "type": {
+                "text": "string"
+              },
+              "default": "'none'",
+              "privacy": "public",
+              "attribute": "maxWidth"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "'New Sheet'",
+              "privacy": "public",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "opened",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "opened"
+            },
+            {
+              "kind": "field",
+              "name": "hideOverlay",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "hideOverlay"
+            },
+            {
+              "kind": "field",
+              "name": "showFooter",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "privacy": "public",
+              "attribute": "showFooter"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "fieldName": "title"
+            },
+            {
+              "name": "width",
+              "fieldName": "width"
+            },
+            {
+              "name": "maxWidth",
+              "fieldName": "maxWidth"
+            },
+            {
+              "name": "opened",
+              "fieldName": "opened"
+            },
+            {
+              "name": "hideOverlay",
+              "fieldName": "hideOverlay"
+            },
+            {
+              "name": "showFooter",
+              "fieldName": "showFooter"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit-element"
+          },
+          "tagName": "stacked-sheet",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "stacked-sheet",
+          "declaration": {
+            "name": "StackedSheet",
+            "module": "src/components/stacked-sheet.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/stacked-sheets-holder.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StackedSheetsHolder",
+          "members": [
+            {
+              "kind": "method",
+              "name": "updateSheets"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit-element"
+          },
+          "tagName": "stacked-sheets-holder",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "stacked-sheets-holder",
+          "declaration": {
+            "name": "StackedSheetsHolder",
+            "module": "src/components/stacked-sheets-holder.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/styles/stacked-sheet-styles.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "StackedSheetStyles",
+          "default": "css`\r\n  :host {\r\n    --sheet-header-background-color: #003b77;\r\n    --sheet-header-text-color: #fff;\r\n    --sheet-header-font-family: \"Museo-300\", \"Times New Roman\", serif;\r\n    --sheet-content-background-color: #f4f4f4;\r\n    box-sizing: border-box;\r\n    display: block;\r\n  }\r\n  *,\r\n  :before,\r\n  :after {\r\n    box-sizing: inherit;\r\n  }\r\n  svg {\r\n    fill: currentColor;\r\n  }\r\n  .sheet {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\r\n    transition: transform 350ms ease-in-out;\r\n    background-color: var(--sheet-content-background-color);\r\n    box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.3),\r\n      0 0 24px 2px rgba(0, 0, 0, 0.24), 0 0 30px 5px rgba(0, 0, 0, 0.22);\r\n  }\r\n  .sheet__header {\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 1.25em 1.5em;\r\n    background-color: var(--sheet-header-background-color);\r\n    color: var(--sheet-header-text-color);\r\n  }\r\n  .sheet__frame {\r\n    position: relative;\r\n    flex: 1 0 0;\r\n    overflow-x: hidden;\r\n    overflow-y: auto;\r\n  }\r\n  .sheet__content {\r\n    padding: 1.5em;\r\n  }\r\n  .sheet__footer {\r\n    padding: 1.5em;\r\n    flex: 0 0 auto;\r\n    background-color: #fff;\r\n    border-top: 1px solid #f4f4f4;\r\n    text-align: var(--sheet-footer-text-align, right);\r\n  }\r\n  .sheet__close {\r\n    display: block;\r\n    flex: 0 0 1em;\r\n    width: 1em;\r\n    height: 1em;\r\n    cursor: pointer;\r\n  }\r\n  .sheet__close > svg {\r\n    width: 100%;\r\n    height: 100%;\r\n  }\r\n  .sheet-overlay {\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    opacity: 0;\r\n    background-color: rgba(0, 0, 0, 0.3);\r\n    transition: opacity 300ms ease-in-out, z-index 1000ms ease-in;\r\n    transition-duration: 300ms, 1000ms;\r\n  }\r\n  .sheet.-is-open ~ .sheet-overlay {\r\n    opacity: 1;\r\n    transition-duration: 300ms, 1ms;\r\n  }\r\n  .sheet__main-heading {\r\n    flex: 1 0 auto;\r\n    margin: 0;\r\n    font-size: 1.25em;\r\n    font-weight: normal;\r\n    font-family: var(--sheet-header-font-family);\r\n    line-height: 1.2;\r\n    max-width: calc(100% - 1em);\r\n  }\r\n`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StackedSheetStyles",
+          "declaration": {
+            "name": "StackedSheetStyles",
+            "module": "src/styles/stacked-sheet-styles.js"
+          }
+        }
+      ]
+    }
+  ]
+}

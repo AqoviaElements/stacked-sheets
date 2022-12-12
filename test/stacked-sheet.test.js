@@ -1,6 +1,6 @@
 import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 
-import "../src/components/stacked-sheet";
+import "../src/components/stacked-sheet.js";
 
 describe("<stacked-sheet>", () => {
   it("instantiating the element with default properties", async () => {
@@ -51,9 +51,7 @@ describe("<stacked-sheet>", () => {
   });
 
   it("closing sheet should emit an event", async () => {
-    const element = await fixture(html`
-      <stacked-sheet> </stacked-sheet>
-    `);
+    const element = await fixture(html` <stacked-sheet> </stacked-sheet> `);
 
     setTimeout(() => {
       expect(element.opened).to.equal(true);

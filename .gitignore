@@ -5,26 +5,19 @@
 ## system files
 .DS_Store
 
+## npm
+/node_modules/
+/npm-debug.log
+
+## testing
+/coverage/
+
 ## temp folders
 /.tmp/
 
-## code coverage folders
-coverage/
+# build
+/_site/
+/dist/
+/out-tsc/
 
-## demo folders
-demo/
-
-## build folders
-dist/
-
-## npm
-node_modules/
-npm-debug.log*
-
-## yarn
-yarn-debug.log*
-yarn-error.log*
-
-## bower
-bower_components/
-bower-*.json*
+custom-elements.json

@@ -7,16 +7,14 @@ import resolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
 import json from "rollup-plugin-json";
 import url from "rollup-plugin-url";
-import livereload from "rollup-plugin-livereload";
-import serve from "rollup-plugin-serve";
 
-export default args => {
-  const dest = args.demo ? "demo" : "dist";
-  const buildType = args.demo ? "development" : "production";
+export default () => {
+  const dest = "dist";
+  const buildType = "production";
 
   const es5BabelTranspilation = babel();
   const es6BabelTranspilation = babel({
-    presets: [["@babel/preset-env", { targets: { esmodules: true } }]]
+    presets: [["@babel/preset-env", { targets: { esmodules: true } }]],
   });
 
   const basePlugins = [
@@ -28,8 +26,8 @@ export default args => {
     json(),
     url({
       include: ["**/*.woff", "**/*.woff2", "**/*.ttf"],
-      limit: Infinity
-    })
+      limit: Infinity,
+    }),
   ];
 
   const copyTask = copy({
@@ -38,12 +36,11 @@ export default args => {
       { src: "src/fonts", dest },
       { src: "node_modules/@webcomponents/webcomponentsjs/bundles", dest },
       {
-        src:
-          "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
-        dest
-      }
+        src: "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
+        dest,
+      },
     ],
-    verbose: true
+    verbose: true,
   });
 
   const stackedSheetEs5 = {
@@ -51,9 +48,10 @@ export default args => {
     output: {
       file: `${dest}/stacked-sheet.es5.js`,
       format: "umd",
-      sourcemap: true
+      sourcemap: true,
+      name: "stackedSheetEs5",
     },
-    plugins: [...basePlugins, es5BabelTranspilation, copyTask]
+    plugins: [...basePlugins, es5BabelTranspilation, copyTask],
   };
 
   const stackedSheetEs6 = {
@@ -61,9 +59,10 @@ export default args => {
     output: {
       file: `${dest}/stacked-sheet.js`,
       format: "es",
-      sourcemap: true
+      sourcemap: true,
+      name: "stackedSheetEs6",
     },
-    plugins: [...basePlugins, es6BabelTranspilation]
+    plugins: [...basePlugins, es6BabelTranspilation],
   };
 
   const stackedSheetsHolderEs5 = {
@@ -71,9 +70,10 @@ export default args => {
     output: {
       file: `${dest}/stacked-sheets-holder.es5.js`,
       format: "umd",
-      sourcemap: true
+      sourcemap: true,
+      name: "stackedSheetHolderEs5",
     },
-    plugins: [...basePlugins, es5BabelTranspilation, copyTask]
+    plugins: [...basePlugins, es5BabelTranspilation, copyTask],
   };
 
   const stackedSheetsHolderEs6 = {
@@ -81,9 +81,10 @@ export default args => {
     output: {
       file: `${dest}/stacked-sheets-holder.js`,
       format: "es",
-      sourcemap: true
+      sourcemap: true,
+      name: "stackedSheetHolderEs6",
     },
-    plugins: [...basePlugins, es6BabelTranspilation]
+    plugins: [...basePlugins, es6BabelTranspilation],
   };
 
   const myAppEs5 = {
@@ -91,9 +92,10 @@ export default args => {
     output: {
       file: `${dest}/my-app.es5.js`,
       format: "umd",
-      sourcemap: true
+      sourcemap: true,
+      name: "stackedSheetDemoEs5",
     },
-    plugins: [...basePlugins, es5BabelTranspilation, copyTask]
+    plugins: [...basePlugins, es5BabelTranspilation, copyTask],
   };
 
   const myAppEs6 = {
@@ -101,19 +103,11 @@ export default args => {
     output: {
       file: `${dest}/my-app.js`,
       format: "es",
-      sourcemap: true
+      sourcemap: true,
+      name: "stackedSheetDemoEs6",
     },
-    plugins: [...basePlugins, es6BabelTranspilation]
+    plugins: [...basePlugins, es6BabelTranspilation],
   };
-
-  if (args.demo) {
-    const demoPlugins = [
-      serve({ contentBase: dest, verbose: true, port: 8999 }),
-      livereload({ watch: dest, exts: ["html", "js"] })
-    ];
-
-    stackedSheetEs6.plugins = [...stackedSheetEs6.plugins, ...demoPlugins];
-  }
 
   return [
     stackedSheetEs5,
@@ -121,6 +115,6 @@ export default args => {
     stackedSheetsHolderEs5,
     stackedSheetsHolderEs6,
     myAppEs5,
-    myAppEs6
+    myAppEs6,
   ];
 };

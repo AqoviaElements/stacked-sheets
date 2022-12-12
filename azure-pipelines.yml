@@ -3,75 +3,75 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 pool:
-  name: Hosted VS2017
+  vmImage: macOS-latest
   demands: npm
 
 name: 1.0.$(BuildID)
 steps:
-- powershell: |
-   $branchName = "$Env:Build_SourceBranchName"
-   
-   # Empty name when branch is master
-   if ($branchName -eq "master"){
-       $branchName = ""
-   } else {
-       $branchName = "-$branchName";
-   }
-   
-   $versionNumber = "$Env:Build_BuildNumber$branchName";
-   Write-Host "Calculated version: $versionNumber"
-   
-   # Setting variable
-   Write-Host "##vso[task.setvariable variable=versionNumber;isOutput=true]$versionNumber"
+  - powershell: |
+      $branchName = "$Env:Build_SourceBranchName"
 
-  displayName: 'Calculate version'
-  name: calculateVersion
+      # Empty name when branch is master
+      if ($branchName -eq "master"){
+          $branchName = ""
+      } else {
+          $branchName = "-$($branchName)";
+      }
 
-- task: Npm@1
-  displayName: 'npm version'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'version $(calculateVersion.versionNumber) --no-git-tag-version'
+      $versionNumber = "$(Build.BuildNumber)$($branchName)";
+      Write-Host "Calculated version: $versionNumber"
 
-- script: |
-    npm install
-  displayName: 'npm install'
+      # Setting variable
+      Write-Host "##vso[task.setvariable variable=versionNumber;isOutput=true]$versionNumber"
 
-- script: |
-    npm run build
-  displayName: 'Build app'
+    displayName: "Calculate version"
+    name: calculateVersion
 
-- script: |
-    npm run lint
-  displayName: 'Run JS Linting'
+  - task: Npm@1
+    displayName: "npm version"
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: "version $(calculateVersion.versionNumber) --no-git-tag-version"
 
-- script: |
-    npm run pipelines-npm-audit
-  displayName: 'Run NPM Auditing'
+  - script: |
+      npm install
+    displayName: "npm install"
 
-- script: |
-    npm run test 
-  displayName: 'Run unit test'
+  - script: |
+      npm run build
+    displayName: "Build app"
 
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: xUnit
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/*test-results.xml'
-  displayName: 'Publish TestResults'
+  - script: |
+      npm run lint
+    displayName: "Run JS Linting"
 
-- task: PublishCodeCoverageResults@1
-  inputs: 
-    codeCoverageTool: cobertura
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/test-coverage'
-  displayName: 'Publish Code Coverage Results'
+  - script: |
+      npm run pipelines-npm-audit
+    displayName: "Run NPM Auditing"
 
-- task: Npm@1
-  displayName: 'Publish to npm registry'
-  inputs:
-    command: custom
-    customCommand: 'publish --access public'
-    customEndpoint: 'NpmRegistry'
-  condition: eq(variables['Build.SourceBranchName'], 'master')
+  - script: |
+      npm run test
+    displayName: "Run unit test"
+
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testRunner: xUnit
+      testResultsFiles: "$(System.DefaultWorkingDirectory)/*test-results.xml"
+    displayName: "Publish TestResults"
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: cobertura
+      summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/*coverage.xml"
+      reportDirectory: "$(System.DefaultWorkingDirectory)/**/test-coverage"
+    displayName: "Publish Code Coverage Results"
+
+  - task: Npm@1
+    displayName: "Publish to npm registry"
+    inputs:
+      command: custom
+      customCommand: "publish --access public"
+      customEndpoint: "NpmRegistry"
+    condition: eq(variables['Build.SourceBranchName'], 'master')

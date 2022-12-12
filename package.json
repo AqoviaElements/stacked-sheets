@@ -8,36 +8,37 @@
   "version": "1.0.0",
   "description": "Webcomponent stacked-sheet with lit-element and open-wc recommendations",
   "license": "MIT",
+  "scripts": {
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server",
+    "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "build": "del-cli dist && rollup -c rollup.config.js",
+    "pipelines-npm-audit": "node build_scripts/pipelines-npm-audit",
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch"
+  },
   "dependencies": {
+    "@babel/preset-env": "^7.20.2",
     "body-scroll-lock": "^4.0.0-beta.0",
+    "lit": "^2.0.2",
     "lit-element": "^2.0.1",
     "lit-html": "^1.1.0"
   },
-  "scripts": {
-    "lint": "npm run lint:eslint && npm run lint:prettier",
-    "format": "npm run format:eslint && npm run format:prettier",
-    "lint:eslint": "eslint --ext .js,.html .",
-    "format:eslint": "eslint --ext .js,.html . --fix",
-    "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
-    "format:prettier": "prettier \"**/*.js\" --write",
-    "build": "del-cli dist && rollup -c rollup.config.js",
-    "demo": "del-cli demo && rollup -w -c rollup.config.js --demo",
-    "pipelines-npm-audit": "node build_scripts/pipelines-npm-audit",
-    "test": "karma start --coverage",
-    "test:watch": "karma start --auto-watch=true --single-run=false",
-    "test:es5": "karma start --legacy --coverage",
-    "test:es5:watch": "karma start --legacy --auto-watch=true --single-run=false"
-  },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.1",
-    "@open-wc/eslint-config": "^0.4.3",
+    "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@open-wc/eslint-config": "^4.3.0",
     "@open-wc/prettier-config": "^0.1.10",
-    "@open-wc/testing": "^2.5.33",
-    "@open-wc/testing-karma": "^4.0.9",
-    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "@open-wc/testing": "next",
+    "@web/dev-server": "^0.1.28",
+    "@web/test-runner": "^0.13.22",
     "del-cli": "^4.0.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "fast-async": "^6.3.8",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.4.1",
     "rollup": "^1.19.4",
     "rollup-plugin-analyzer": "^3.0.0",
     "rollup-plugin-babel": "^4.3.2",
@@ -51,7 +52,24 @@
     "rollup-plugin-node-resolve": "^4.2.3",
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-serve": "^1.0.1",
-    "rollup-plugin-url": "^2.2.2",
-    "webpack-merge": "^4.2.1"
+    "rollup-plugin-url": "^2.2.2"
+  },
+  "customElements": "custom-elements.json",
+  "eslintConfig": {
+    "extends": [
+      "@open-wc",
+      "prettier"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
