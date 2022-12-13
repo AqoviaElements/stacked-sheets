@@ -6,10 +6,13 @@ pool:
   vmImage: macOS-latest
   demands: npm
 
+# no PR builds
+pr: none
+
 name: 1.0.$(BuildID)
 steps:
   - powershell: |
-      $branchName = "$Env:Build_SourceBranchName"
+      $branchName = "$(Build.SourceBranchName)"
 
       # Empty name when branch is master
       if ($branchName -eq "master"){
